@@ -32,18 +32,21 @@ if [ -n "$(git status --porcelain)" ]; then
     exit 1
 fi
 
-# Update package.json version
-echo "📦 Updating package.json version..."
-npm version $VERSION --no-git-tag-version
+# Install dependencies
+echo "📦 Installing dependencies..."
+npm ci
 
-# Build the package
+# Run tests first
+echo "🧪 Running tests..."
+npm test
+
+# Build the package (to verify it builds successfully)
 echo "🔨 Building package..."
 npm run build
 
-# Commit the changes including dist folder
-echo "💾 Committing changes..."
-git add .
-git commit -m "Release: $TAG - Build and update dist folder"
+# Update package.json version
+echo "📦 Updating package.json version..."
+npm version $VERSION --no-git-tag-version
 
 # Create and push the tag
 echo "🏷️  Creating tag $TAG..."
