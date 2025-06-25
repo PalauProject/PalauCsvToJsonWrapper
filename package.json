@@ -29,12 +29,12 @@
 	"license": "ISC",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/yourusername/palau-csvtojson-wrapper.git"
+		"url": "https://github.com/PalauProject/PalauCsvToJsonWrapper.git"
 	},
 	"bugs": {
-		"url": "https://github.com/yourusername/palau-csvtojson-wrapper/issues"
+		"url": "https://github.com/PalauProject/PalauCsvToJsonWrapper/issues"
 	},
-	"homepage": "https://github.com/yourusername/palau-csvtojson-wrapper#readme",
+	"homepage": "https://github.com/PalauProject/PalauCsvToJsonWrapper#readme",
 	"dependencies": {
 		"csvtojson": "^2.0.10"
 	},
