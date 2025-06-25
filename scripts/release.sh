@@ -48,9 +48,10 @@ npm run build
 echo "📦 Updating package.json version..."
 npm version $VERSION --no-git-tag-version
 
-# Stage the version update
-echo "📝 Staging version update..."
+# Commit the version update
+echo "💾 Committing version update..."
 git add package.json package-lock.json
+git commit -m "Release: $TAG"
 
 # Create and push the tag
 echo "🏷️  Creating tag $TAG..."
