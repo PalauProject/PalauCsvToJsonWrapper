@@ -1,6 +1,6 @@
 {
 	"name": "palau-csvtojson-wrapper",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "A powerful wrapper around the csvtojson package with enhanced functionality for CSV to JSON conversion",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
