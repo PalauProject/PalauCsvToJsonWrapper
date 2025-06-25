@@ -1,4 +1,4 @@
-name: Build and Push Dist
+name: Build and Release
 
 on:
     push:
@@ -8,9 +8,9 @@ on:
         branches: [main]
 
 jobs:
-    build-and-push:
+    build:
         runs-on: ubuntu-latest
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && !startsWith(github.ref, 'refs/tags/')
 
         steps:
             - name: Checkout code
@@ -45,13 +45,13 @@ jobs:
     release:
         runs-on: ubuntu-latest
         if: startsWith(github.ref, 'refs/tags/v')
-        needs: build-and-push
 
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
               with:
                   fetch-depth: 0
+                  token: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Setup Node.js
               uses: actions/setup-node@v4
@@ -67,6 +67,14 @@ jobs:
 
             - name: Build package
               run: npm run build
+
+            - name: Commit and push dist folder
+              run: |
+                  git config --local user.email "action@github.com"
+                  git config --local user.name "GitHub Action"
+                  git add dist/
+                  git diff --quiet && git diff --staged --quiet || git commit -m "Build: Update dist folder for release [skip ci]"
+                  git push
 
             - name: Create Release
               uses: actions/create-release@v1

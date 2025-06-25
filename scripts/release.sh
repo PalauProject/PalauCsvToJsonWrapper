@@ -40,10 +40,10 @@ npm version $VERSION --no-git-tag-version
 echo "🔨 Building package..."
 npm run build
 
-# Commit the changes
+# Commit the changes including dist folder
 echo "💾 Committing changes..."
 git add .
-git commit -m "Release: $TAG"
+git commit -m "Release: $TAG - Build and update dist folder"
 
 # Create and push the tag
 echo "🏷️  Creating tag $TAG..."
