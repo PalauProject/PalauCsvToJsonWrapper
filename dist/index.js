@@ -42,7 +42,7 @@ class PalauCsvToJsonWrapper {
      * @returns Promise that resolves to the processed CSV data with headers
      * @private
      */
-    async _processCsv(input, options = {}, inputType = "string") {
+    async _parseCsv(input, options = {}, inputType = "string") {
         const mergedOptions = { ...this.options, ...options };
         // For streams, buffer the content first
         let csvContent;
@@ -104,7 +104,7 @@ class PalauCsvToJsonWrapper {
      * @returns Promise that resolves to the processed CSV data with headers
      */
     async fromString(csvString, options = {}) {
-        return await this._processCsv(csvString, options, "string");
+        return await this._parseCsv(csvString, options, "string");
     }
     /**
      * Convert CSV file to JSON
@@ -113,7 +113,7 @@ class PalauCsvToJsonWrapper {
      * @returns Promise that resolves to the processed CSV data with headers
      */
     async fromFile(filePath, options = {}) {
-        return await this._processCsv(filePath, options, "file");
+        return await this._parseCsv(filePath, options, "file");
     }
     /**
      * Convert CSV stream to JSON
@@ -122,7 +122,7 @@ class PalauCsvToJsonWrapper {
      * @returns Promise that resolves to the processed CSV data with headers
      */
     async fromStream(stream, options = {}) {
-        return await this._processCsv(stream, options, "stream");
+        return await this._parseCsv(stream, options, "stream");
     }
     /**
      * Get the underlying csvtojson instance for advanced usage

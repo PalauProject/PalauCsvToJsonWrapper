@@ -1,4 +1,4 @@
-import PalauCsvToJsonWrapper, { CsvProcessingResult } from "../index";
+import PalauCsvToJsonWrapper, { CsvParsingResult } from "../index";
 import { Readable } from "stream";
 
 describe("PalauCsvToJsonWrapper", () => {
@@ -367,7 +367,7 @@ Bob`;
 		it("should return correct TypeScript types", async () => {
 			const csvString = `name,age\nJohn,25`;
 
-			const result: CsvProcessingResult = await wrapper.fromString(
+			const result: CsvParsingResult = await wrapper.fromString(
 				csvString
 			);
 

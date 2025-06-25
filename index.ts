@@ -1,9 +1,10 @@
 import csvtojson from "csvtojson";
 import { Readable } from "stream";
 
-export interface CsvProcessingResult {
+export interface CsvParsingResult {
 	headers: string[];
 	data: any[];
+	[key: string]: any;
 }
 
 export interface CsvOptions {
@@ -50,11 +51,11 @@ export class PalauCsvToJsonWrapper {
 	 * @returns Promise that resolves to the processed CSV data with headers
 	 * @private
 	 */
-	private async _processCsv(
+	private async _parseCsv(
 		input: string | Readable,
 		options: CsvOptions = {},
 		inputType: "string" | "file" | "stream" = "string"
-	): Promise<CsvProcessingResult> {
+	): Promise<CsvParsingResult> {
 		const mergedOptions = { ...this.options, ...options };
 
 		// For streams, buffer the content first
@@ -122,8 +123,8 @@ export class PalauCsvToJsonWrapper {
 	async fromString(
 		csvString: string,
 		options: CsvOptions = {}
-	): Promise<CsvProcessingResult> {
-		return await this._processCsv(csvString, options, "string");
+	): Promise<CsvParsingResult> {
+		return await this._parseCsv(csvString, options, "string");
 	}
 
 	/**
@@ -135,8 +136,8 @@ export class PalauCsvToJsonWrapper {
 	async fromFile(
 		filePath: string,
 		options: CsvOptions = {}
-	): Promise<CsvProcessingResult> {
-		return await this._processCsv(filePath, options, "file");
+	): Promise<CsvParsingResult> {
+		return await this._parseCsv(filePath, options, "file");
 	}
 
 	/**
@@ -148,8 +149,8 @@ export class PalauCsvToJsonWrapper {
 	async fromStream(
 		stream: Readable,
 		options: CsvOptions = {}
-	): Promise<CsvProcessingResult> {
-		return await this._processCsv(stream, options, "stream");
+	): Promise<CsvParsingResult> {
+		return await this._parseCsv(stream, options, "stream");
 	}
 
 	/**

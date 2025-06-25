@@ -1,8 +1,9 @@
 import csvtojson from "csvtojson";
 import { Readable } from "stream";
-export interface CsvProcessingResult {
+export interface CsvParsingResult {
     headers: string[];
     data: any[];
+    [key: string]: any;
 }
 export interface CsvOptions {
     [key: string]: any;
@@ -29,28 +30,28 @@ export declare class PalauCsvToJsonWrapper {
      * @returns Promise that resolves to the processed CSV data with headers
      * @private
      */
-    private _processCsv;
+    private _parseCsv;
     /**
      * Convert CSV string to JSON
      * @param csvString - The CSV string to convert
      * @param options - Options to override defaults
      * @returns Promise that resolves to the processed CSV data with headers
      */
-    fromString(csvString: string, options?: CsvOptions): Promise<CsvProcessingResult>;
+    fromString(csvString: string, options?: CsvOptions): Promise<CsvParsingResult>;
     /**
      * Convert CSV file to JSON
      * @param filePath - Path to the CSV file
      * @param options - Options to override defaults
      * @returns Promise that resolves to the processed CSV data with headers
      */
-    fromFile(filePath: string, options?: CsvOptions): Promise<CsvProcessingResult>;
+    fromFile(filePath: string, options?: CsvOptions): Promise<CsvParsingResult>;
     /**
      * Convert CSV stream to JSON
      * @param stream - The CSV stream to convert
      * @param options - Options to override defaults
      * @returns Promise that resolves to the processed CSV data with headers
      */
-    fromStream(stream: Readable, options?: CsvOptions): Promise<CsvProcessingResult>;
+    fromStream(stream: Readable, options?: CsvOptions): Promise<CsvParsingResult>;
     /**
      * Get the underlying csvtojson instance for advanced usage
      * @returns The csvtojson instance
