@@ -14,7 +14,7 @@ A powerful TypeScript wrapper around the `csvtojson` package that provides enhan
 ## Installation
 
 ```bash
-npm install palau-csvtojson-wrapper
+npm install git+https://github.com/PalauProject/PalauCsvToJsonWrapper.git
 ```
 
 ## Quick Start
