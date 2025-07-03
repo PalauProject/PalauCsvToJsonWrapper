@@ -169,6 +169,18 @@ export class PalauCsvToJsonWrapper {
 	withOptions(options: CsvOptions): PalauCsvToJsonWrapper {
 		return new PalauCsvToJsonWrapper({ ...this.options, ...options });
 	}
+
+	/**
+	 * Clean a single processed header title (remove blank_x or duplicate_x_ prefixes)
+	 * @param header - The processed header string
+	 * @returns The cleaned header string
+	 */
+	static cleanHeaderTitle(header: string): string {
+		if (/^blank_\d+$/.test(header)) return "";
+		const dupMatch = header.match(/^duplicate_\d+_(.*)$/);
+		if (dupMatch) return dupMatch[1] ?? "";
+		return header;
+	}
 }
 
 // Export the wrapper class
