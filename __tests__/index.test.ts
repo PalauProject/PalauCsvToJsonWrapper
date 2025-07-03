@@ -377,4 +377,31 @@ Bob`;
 			expect(typeof result.data[0]).toBe("object");
 		});
 	});
+
+	describe("cleanHeaderTitle", () => {
+		it("should return empty string for blank_x headers", () => {
+			expect(PalauCsvToJsonWrapper.cleanHeaderTitle("blank_0")).toBe("");
+			expect(PalauCsvToJsonWrapper.cleanHeaderTitle("blank_12")).toBe("");
+		});
+
+		it("should return the name for duplicate_x_name headers", () => {
+			expect(
+				PalauCsvToJsonWrapper.cleanHeaderTitle("duplicate_2_name")
+			).toBe("name");
+			expect(
+				PalauCsvToJsonWrapper.cleanHeaderTitle("duplicate_0_email")
+			).toBe("email");
+			expect(
+				PalauCsvToJsonWrapper.cleanHeaderTitle("duplicate_15_city")
+			).toBe("city");
+		});
+
+		it("should return the header as-is for normal headers", () => {
+			expect(PalauCsvToJsonWrapper.cleanHeaderTitle("name")).toBe("name");
+			expect(PalauCsvToJsonWrapper.cleanHeaderTitle("email")).toBe(
+				"email"
+			);
+			expect(PalauCsvToJsonWrapper.cleanHeaderTitle("city")).toBe("city");
+		});
+	});
 });
