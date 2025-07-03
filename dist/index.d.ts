@@ -63,6 +63,12 @@ export declare class PalauCsvToJsonWrapper {
      * @returns New wrapper instance
      */
     withOptions(options: CsvOptions): PalauCsvToJsonWrapper;
+    /**
+     * Clean a single processed header title (remove blank_x or duplicate_x_ prefixes)
+     * @param header - The processed header string
+     * @returns The cleaned header string
+     */
+    static cleanHeaderTitle(header: string): string;
 }
 export default PalauCsvToJsonWrapper;
 export declare const defaultInstance: PalauCsvToJsonWrapper;
